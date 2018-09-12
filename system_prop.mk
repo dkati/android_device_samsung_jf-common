@@ -20,7 +20,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
     persist.audio.fluence.speaker=true \
     persist.audio.fluence.voicecall=true \
     qcom.hw.aac.encoder=true \
-    media.aac_51_output_enable=true \
     ro.qc.sdk.audio.fluencetype=fluence \
     use.dedicated.device.for.voip=true \
     use.voice.path.for.pcm.voip=false
@@ -32,10 +31,12 @@ PRODUCT_PROPERTY_OVERRIDES += \
 # Bluetooth
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.bt.bdaddr_path=/efs/bluetooth/bt_addr \
-    persist.bt.enableAptXHD=true \
-    qcom.bluetooth.soc=smd \
-    ro.bluetooth.hfp.ver=1.6 \
-    ro.qualcomm.bt.hci_transport=smd
+    persist.bt.enableAptXHD=true
+
+# Calls
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.telephony.call_ring.delay=0 \
+    ring.delay=0
 
 # Charger
 PRODUCT_PROPERTY_OVERRIDES += \
@@ -77,27 +78,24 @@ PRODUCT_PROPERTY_OVERRIDES += \
 # Display
 PRODUCT_PROPERTY_OVERRIDES += \
     debug.hwui.use_buffer_age=false \
-    debug.sf.hw=1 \
     debug.composition.type=c2d \
     ro.opengles.version=196608 \
-    ro.qualcomm.cabl=0 \
-    ro.hwui.text_large_cache_height=2048 \
-    persist.debug.wfd.enable=1 \
-    persist.sys.wfd.virtual=0 \
-    ro.sf.lcd_density=420 \
-    persist.hwc.mdpcomp.enable=false
+    ro.sf.lcd_density=420
 
 # GPS
 PRODUCT_PROPERTY_OVERRIDES += \
-	ro.gps.agps_provider=1 \
-	ro.qc.sdk.izat.premium_enabled=0 \
-	ro.qc.sdk.izat.service_mask=0x0 \
     persist.gps.qc_nlp_in_use=1
 
 # Media
 PRODUCT_PROPERTY_OVERRIDES += \
     camera2.portability.force_api=1 \
-    mm.enable.smoothstreaming=true
+    mm.enable.smoothstreaming=true \
+    persist.media.treble_omx=false \
+    media.stagefright.enable-player=true \
+    media.stagefright.enable-meta=true \
+    media.stagefright.enable-scan=false \
+    media.stagefright.enable-http=true \
+    video.accelerate.hw=1
 
 # NFC
 PRODUCT_PROPERTY_OVERRIDES += \
@@ -144,4 +142,8 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_PROPERTY_OVERRIDES += \
    wifi.interface=wlan0
     
+# ro.product.first_api_level indicates the first api level
+# the device has commercially launched on
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.product.first_api_level=19
     

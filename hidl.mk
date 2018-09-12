@@ -22,7 +22,8 @@ PRODUCT_PACKAGES += \
 
 # Bluetooth HIDL interfaces
 PRODUCT_PACKAGES += \
-    android.hardware.bluetooth@1.0-impl
+    android.hardware.bluetooth@1.0-impl \
+    android.hardware.bluetooth@1.0-service
 
 # Camera HIDL
 PRODUCT_PACKAGES += \
@@ -67,11 +68,6 @@ PRODUCT_PACKAGES += \
     android.hardware.light@2.0-impl \
     android.hardware.light@2.0-service
 
-# NFC HIDL
-PRODUCT_PACKAGES += \
-    android.hardware.nfc@1.0-impl-bcm \
-    android.hardware.nfc@1.0-service
-
 # Power HIDL
 PRODUCT_PACKAGES += \
     android.hardware.power@1.0-impl \
@@ -89,7 +85,7 @@ PRODUCT_PACKAGES += \
 
 # USB HIDL
 PRODUCT_PACKAGES += \
-    android.hardware.usb@1.0-service
+    android.hardware.usb@1.0-service.basic
 
 # Vibrator HIDL
 PRODUCT_PACKAGES += \
@@ -98,5 +94,6 @@ PRODUCT_PACKAGES += \
 
 # WiFi HIDL
 PRODUCT_PACKAGES += \
+    android.hardware.wifi@1.0-impl \
     android.hardware.wifi@1.0-service
 

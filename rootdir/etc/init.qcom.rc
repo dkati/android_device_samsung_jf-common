@@ -59,9 +59,6 @@ on fs
     # default country code
     setprop ro.boot.wificountrycode 00
 
-on post-fs 
-    chmod 0222 /sys/kernel/debug/tracing/trace_marker
-    
 on post-fs-data
     # Create directories for tombstone
     mkdir /data/tombstones 0771 system system
@@ -389,16 +386,14 @@ on boot
     # Wifi firmware reload path
     chown wifi wifi /sys/module/dhd/parameters/firmware_path
 
+    # Force dumpsys to enable idle state
+    dumpsys deviceidle enable
+    dumpsys deviceidle force-inactive
+
 service qcamerasvr /system/vendor/bin/mm-qcamera-daemon
     class late_start
     user camera
     group camera system inet input graphics
-
-on property:persist.sys.camera.preview=1
-    write /sys/class/leds/led_b/brightness 40
-
-on property:persist.sys.camera.preview=0
-    write /sys/class/leds/led_b/brightness 0  
 
 on property:init.svc.media=restarting
     restart qcamerasvr
@@ -470,7 +465,7 @@ service wpa_supplicant /vendor/bin/hw/wpa_supplicant \
     -ip2p0 -Dnl80211 -c/data/misc/wifi/p2p_supplicant.conf \
     -I/vendor/etc/wifi/p2p_supplicant_overlay.conf \
     -puse_p2p_group_interface=1 -puse_multi_chan_concurrent=1 \
-    -g@android:wpa_wlan0
+    -e/data/misc/wifi/entropy.bin -g@android:wpa_wlan0
     #   we will start as root and wpa_supplicant will switch to user wifi
     #   after setting up the capabilities required for WEXT
     #   user wifi

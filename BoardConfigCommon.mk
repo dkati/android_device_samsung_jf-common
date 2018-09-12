@@ -22,11 +22,14 @@
 
 COMMON_PATH := device/samsung/jf-common
 
+# Set default locale
+PRODUCT_LOCALES := en-GB
+
+# Exclude serif fonts for saving system.img size.
+EXCLUDE_SERIF_FONTS := true
+
 # Inherit from qcom-common
 -include device/samsung/qcom-common/BoardConfigCommon.mk
-
-# Shipping api level, 17= Android 4.2.2
-PRODUCT_SHIPPING_API_LEVEL := 17
 
 TARGET_SPECIFIC_HEADER_PATH += $(COMMON_PATH)/include
 # ADB
@@ -51,12 +54,6 @@ TARGET_CPU_VARIANT := krait
 # Bootloader
 TARGET_BOOTLOADER_BOARD_NAME := MSM8960
 
-# Fonts
-SMALLER_FONT_FOOTPRINT := true
-
-# Default locale
-PRODUCT_LOCALES := en-GB
-
 # Kernel
 BOARD_KERNEL_CMDLINE := androidboot.hardware=qcom user_debug=31 androidboot.memcg=true zcache msm_rtb.filter=0x3F ehci-hcd.park=3 androidboot.selinux=permissive
 BOARD_KERNEL_BASE := 0x80200000
@@ -77,8 +74,11 @@ TARGET_EXFAT_DRIVER := sdfat
 
 # Audio
 BOARD_USES_ALSA_AUDIO := true
-USE_CUSTOM_AUDIO_POLICY := 1
+USE_CUSTOM_AUDIO_POLICY := true
+USE_LEGACY_AUDIO_POLICY := true
 BOARD_HAVE_SAMSUNG_CSDCLIENT := true
+USE_LEGACY_LOCAL_AUDIO_HAL := true
+USE_XML_AUDIO_POLICY_CONF := true
 
 # Binder
 TARGET_USES_64_BIT_BINDER := true
@@ -90,8 +90,7 @@ PRODUCT_AAPT_PREF_CONFIG := xxhdpi
 # Boot animation
 TARGET_SCREEN_HEIGHT := 1920
 TARGET_SCREEN_WIDTH := 1080
-TARGET_BOOTANIMATION_PRELOAD := true
-TARGET_BOOTANIMATION_TEXTURE_CACHE := true
+TARGET_BOOTANIMATION_HALF_RES := true
 
 # Bluetooth
 BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := $(COMMON_PATH)/bluetooth
@@ -103,7 +102,6 @@ BOARD_HAVE_BLUETOOTH_BCM := true
 # Camera
 TARGET_PROVIDES_CAMERA_HAL := true
 USE_DEVICE_SPECIFIC_CAMERA := true
-TARGET_NEEDS_LEGACY_CAMERA_HAL1_DYN_NATIVE_HANDLE := true
 
 # dexpreopt
 WITH_DEXPREOPT := true
@@ -124,7 +122,9 @@ BOARD_CHARGER_SHOW_PERCENTAGE := true
 BOARD_HARDWARE_CLASS += $(COMMON_PATH)/lineagehw
 
 # Display
+NUM_FRAMEBUFFER_SURFACE_BUFFERS := 3
 OVERRIDE_RS_DRIVER := libRSDriver_adreno.so
+#TARGET_DISPLAY_USE_RETIRE_FENCE := true
 
 # Fonts
 EXTENDED_FONT_FOOTPRINT := true
@@ -138,7 +138,7 @@ TARGET_NO_RPC := true
 TARGET_SPECIFIC_HEADER_PATH += $(COMMON_PATH)/include
 
 # NFC
-BOARD_NFC_HAL_SUFFIX := msm8960
+#BOARD_NFC_HAL_SUFFIX := msm8960
 
 # Partitions
 TARGET_USERIMAGES_USE_EXT4 := true
@@ -152,12 +152,6 @@ BOARD_FLASH_BLOCK_SIZE := 131072
 # Power
 TARGET_POWERHAL_VARIANT := qcom
 
-# Runtime
-ANDROID_NO_TEST_CHECK := true # Don't try to build and run all tests by default. 
-PRODUCT_MINIMIZE_JAVA_DEBUG_INFO := true
-PRODUCT_SYSTEM_SERVER_COMPILER_FILTER := speed-profile
-PRODUCT_ALWAYS_PREOPT_EXTRACTED_APK := true
-
 # Recovery
 TARGET_RECOVERY_DENSITY := hdpi
 TARGET_RECOVERY_FSTAB := $(COMMON_PATH)/rootdir/etc/fstab.qcom
@@ -166,7 +160,7 @@ TARGET_RECOVERY_FSTAB := $(COMMON_PATH)/rootdir/etc/fstab.qcom
 TARGET_RELEASETOOLS_EXTENSIONS := $(COMMON_PATH)/releasetools
 
 # RIL
-BOARD_PROVIDES_LIBRIL := true
+#BOARD_PROVIDES_LIBRIL := true
 
 # SDClang
 #TARGET_USE_SDCLANG := true
@@ -178,6 +172,10 @@ BOARD_SEPOLICY_DIRS += $(COMMON_PATH)/sepolicy
 
 # SU
 WITH_SU := true
+
+# Vendor Init
+#TARGET_INIT_VENDOR_LIB := libinit_jflte
+#TARGET_LIBINIT_DEFINES_FILE := $(COMMON_PATH)/init/init_jflte.cpp
 
 # Wifi module
 BOARD_WLAN_DEVICE := bcmdhd

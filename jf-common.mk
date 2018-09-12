@@ -62,8 +62,6 @@ PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.usb.host.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.usb.host.xml \
     frameworks/native/data/etc/android.hardware.wifi.direct.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.wifi.direct.xml \
     frameworks/native/data/etc/android.hardware.wifi.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.wifi.xml \
-    frameworks/native/data/etc/android.hardware.wifi.direct.xml:system/etc/permissions/android.hardware.wifi.direct.xml \
-    frameworks/native/data/etc/android.hardware.wifi.xml:system/etc/permissions/android.hardware.wifi.xml \
     frameworks/native/data/etc/android.hardware.wifi.aware.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.wifi.aware.xml \
     frameworks/native/data/etc/android.hardware.wifi.passpoint.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.wifi.passpoint.xml \
     frameworks/native/data/etc/android.software.sip.voip.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.software.sip.voip.xml \
@@ -73,7 +71,7 @@ PRODUCT_COPY_FILES += \
 
 # Audio configuration
 PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/audio/audio_effects.conf:$(TARGET_COPY_OUT_VENDOR)/etc/audio_effects.conf \
+    $(LOCAL_PATH)/audio/audio_effects.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio_effects.xml \
     $(LOCAL_PATH)/audio/audio_platform_info.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio_platform_info.xml \
     $(LOCAL_PATH)/audio/audio_policy.conf:$(TARGET_COPY_OUT_VENDOR)/etc/audio_policy.conf \
     $(LOCAL_PATH)/audio/mixer_paths.xml:$(TARGET_COPY_OUT_VENDOR)/etc/mixer_paths.xml
@@ -94,7 +92,6 @@ PRODUCT_COPY_FILES += \
 # GPS configs
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/gps.conf:system/etc/gps.conf \
-    $(LOCAL_PATH)/configs/gps.conf:system/vendor/etc/gps.conf \
     $(LOCAL_PATH)/configs/sap.conf:system/etc/sap.conf
 
 # Keylayouts
@@ -108,9 +105,9 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/keylayout/ue_rf4ce_remote.kl:system/usr/keylayout/ue_rf4ce_remote.kl
 
 # GPS Configs
-PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/configs/libnfc-brcm.conf:system/vendor/etc/libnfc-brcm.conf \
-    $(LOCAL_PATH)/configs/nfcee_access.xml:system/vendor/etc/nfcee_access.xml
+#PRODUCT_COPY_FILES += \
+ #   $(LOCAL_PATH)/configs/libnfc-brcm.conf:system/vendor/etc/libnfc-brcm.conf \
+ #   $(LOCAL_PATH)/configs/nfcee_access.xml:system/vendor/etc/nfcee_access.xml
 
 # Bluetooth firmware
 PRODUCT_COPY_FILES += \
@@ -126,9 +123,9 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/selective-spn-conf.xml:system/vendor/etc/selective-spn-conf.xml
 
 # Seccomp policy
-#PRODUCT_COPY_FILES += \
-#    $(LOCAL_PATH)/seccomp_policy/mediacodec.policy:$(TARGET_COPY_OUT_VENDOR)/etc/seccomp_policy/mediacodec.policy \
-#    $(LOCAL_PATH)/seccomp_policy/mediaextractor.policy:$(TARGET_COPY_OUT_VENDOR)/etc/seccomp_policy/mediaextractor.policy
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/seccomp_policy/mediacodec.policy:$(TARGET_COPY_OUT_VENDOR)/etc/seccomp_policy/mediacodec.policy \
+    $(LOCAL_PATH)/seccomp_policy/mediaextractor.policy:$(TARGET_COPY_OUT_VENDOR)/etc/seccomp_policy/mediaextractor.policy
 
 # Thermal
 PRODUCT_COPY_FILES += \
@@ -148,20 +145,7 @@ PRODUCT_PACKAGES += \
     audio.r_submix.default \
     audio.usb.default \
     libaudio-resampler \
-    libqcomvoiceprocessing \
-    libtinycompress \
-    tinyplay \
-    tinycap \
-    tinymix \
-    tinypcminfo
-
-# Bluetooth
-PRODUCT_PACKAGES += \
-    libbt-vendor
-
-# Camera
-PRODUCT_PACKAGES += \
-    Snap
+    libqcomvoiceprocessing
 
 # Display
 PRODUCT_PACKAGES += \
@@ -171,17 +155,8 @@ PRODUCT_PACKAGES += \
     memtrack.msm8960
 
 # Doze
-PRODUCT_PACKAGES += \
-    SamsungDoze
-
-# FlipFlap
-PRODUCT_PACKAGES += \
-    FlipFlap
-
-# GPS HAL
-PRODUCT_PACKAGES += \
-    gps.msm8960 \
-    gps.conf
+#PRODUCT_PACKAGES += \
+#    SamsungDoze
 
 # Filesystem tools
 PRODUCT_PACKAGES += \
@@ -209,13 +184,13 @@ PRODUCT_PACKAGES += \
     recovery-transform.sh
 
 # NFC packages
-PRODUCT_PACKAGES += \
-    libnfc-nci \
-    libnfc_nci_jni \
-    nfc_nci.bcm2079x.default \
-    NfcNci \
-    Tag \
-    com.android.nfc_extras
+#PRODUCT_PACKAGES += \
+ #   libnfc-nci \
+ #   libnfc_nci_jni \
+ #   nfc_nci.bcm2079x.default \
+ #   NfcNci \
+ #   Tag \
+ #   com.android.nfc_extras
 
 # OMX
 PRODUCT_PACKAGES += \
@@ -267,16 +242,6 @@ PRODUCT_PACKAGES += \
     OpenWeatherMapWeatherProvider \
     YahooWeatherProvider \
     WundergroundWeatherProvider
-
-# Wifi
-PRODUCT_PACKAGES += \
-    libnetcmdiface \
-    macloader \
-    hostapd \
-    wificond \
-    libwpa_client \
-    wpa_supplicant \
-    wpa_supplicant.conf
 
 
 # call common jf system props
