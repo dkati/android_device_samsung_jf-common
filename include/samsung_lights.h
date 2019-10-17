@@ -18,6 +18,10 @@
 #ifndef SAMSUNG_LIGHTS_H
 #define SAMSUNG_LIGHTS_H
 
+#define LED_R_NODE "/sys/class/sec/led/led_r"
+#define LED_G_NODE "/sys/class/sec/led/led_g"
+#define LED_B_NODE "/sys/class/sec/led/led_b"
+
 /*
  * Board specific nodes
  *
